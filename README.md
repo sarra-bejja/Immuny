@@ -387,13 +387,6 @@ print(f"Best multimodal matches: {len(results)} results")
 - **HNSW** (Malkov & Yashunin, 2018): Efficient Approximate Nearest Neighbor Search
 - **Chonkie**: Intelligent semantic text chunking
 
-
-### Tools & Resources
-- [Qdrant Documentation](https://qdrant.tech/documentation/)
-- [Sentence Transformers](https://www.sbert.net/)
-- [OpenAI CLIP](https://github.com/openai/CLIP)
-- [Chonkie](https://github.com/kesamet/chonkie)
-
 ---
 
 ## 📋 Dataset Statistics
