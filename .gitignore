@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# VS Code
+.vscode/
+
+# Data files (optional - uncomment if you don't want to push large datasets)
+# Immuny_dataset_clean/
+
+# Credentials (IMPORTANT - keep secrets safe!)
+.env
+config.py
+*credentials*
+*secrets*
+
+# Large model files
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# OS
+.DS_Store
+Thumbs.db
