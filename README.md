@@ -1,7 +1,7 @@
 # 🏥 IMMUNY: Multimodal Semantic Search for Autoimmune Disease Cases
 
-**Advanced AI-powered system for discovering autoimmune disease cases and similar past 
-biological situations through hybrid multimodal search combining medical text and images.**
+**Multimodal Biological Memory for discovering autoimmune disease cases and similar past 
+biological situations through hybrid search combining medical text and images.**
 
 ---
 
