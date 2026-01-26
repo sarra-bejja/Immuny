@@ -1,13 +1,17 @@
 # 🏥 IMMUNY: Multimodal Semantic Search for Autoimmune Disease Cases
 
-**Advanced AI-powered system for discovering autoimmune disease cases through hybrid multimodal search combining medical text and images.**
+**Advanced AI-powered system for discovering autoimmune disease cases and similar past 
+biological situations through hybrid multimodal search combining medical text and images.**
 
 ---
 
 ## 🎯 Project Overview
 
-**IMMUNY** is a state-of-the-art semantic search platform that enables researchers and medical professionals to discover clinically relevant autoimmune disease cases using:
-- 📝 **Text-based queries** (symptoms, diagnoses, treatments)
+Immuny is Not a chatbot, not a diagnostic tool, not “AI decides treatment” , and not about 
+storing personal patient data  
+Immuny lets researchers ask: “Have we seen an immune situation like this before, and what 
+happened?”  using:
+- 📝 **Text-based queries** (symptoms, bioMarks, diagnoses, treatments)
 - 🖼️ **Image-based queries** (medical imaging)
 - 🔀 **Multimodal hybrid queries** (combined text + image search)
 
@@ -17,7 +21,7 @@
 ✅ **Multimodal Embeddings** (384D text + 512D images)  
 ✅ **HNSW-Indexed Vector Database** (250x faster search)  
 ✅ **Cloud-Hosted Qdrant** (serverless, managed infrastructure)  
-✅ **Semantic Chunking** with Chonkie (context-aware 67K chunks)  
+✅ **Chunking** with Chonkie (context-aware 67K chunks)  
 
 ---
 
@@ -99,7 +103,7 @@ IMMUNY combines cutting-edge AI technologies to:
 - Validate image file paths and metadata consistency
 - **Output**: 5,310 cleaned cases, 950 valid images
 
-### **PHASE 2: Intelligent Text Chunking (Chonkie)**
+### **PHASE 2: Text Chunking (Chonkie)**
 - Split case texts at semantic boundaries (not fixed sizes)
 - Preserve clinical context within chunks
 - Generate ~67,000 chunks (avg 180 chars, 50-300 tokens each)
@@ -137,7 +141,7 @@ IMMUNY combines cutting-edge AI technologies to:
 - Build image-only similarity search
 - Build multimodal hybrid search
 - Implement result re-ranking and filtering
-- Create REST API endpoints
+- choice of LLM 
 - Deploy web UI 
 
 ---
@@ -154,6 +158,7 @@ IMMUNY combines cutting-edge AI technologies to:
 | **PyTorch** | 2.0+ | Deep learning framework backend |
 | **OpenCV** | 4.8+ | Image processing utilities |
 | **Pillow** | 10.0+ | Image format handling |
+
 
 ### Data Processing
 | Library | Version | Purpose |
@@ -265,6 +270,7 @@ Return top-10 best matches across text + image
 ```
 Immuny/
 ├── 📔 dataEmbeddingQdrant.ipynb        # Main pipeline notebook (Phases 1-5)
+├── 📔 dataFilttering.ipynb             #colab pipline for data filtering and cleaning
 ├── 📊 Immuny_dataset_clean/            # Cleaned dataset
 │   └── autoimmune_d_dataset/
 │       ├── cases_cleaned.csv           # 5,310 cleaned case reports
@@ -275,92 +281,11 @@ Immuny/
 │           └── *.png, *.webp files
 ├── 📄 .env                             # Credentials (QDRANT_URL, QDRANT_API_KEY)
 ├── 📖 README.md                        # This file
-├── 📋 TECHNICAL_REPORT.md              # Detailed technical documentation
 └── 📝 requirements.txt                 # Python dependencies
 ```
 
 ---
 
-## 🚀 Quick Start Guide
-
-### Prerequisites
-- Python 3.10+
-- 4GB+ RAM (8GB recommended for embedding generation)
-- Qdrant Cloud account (free tier: 1GB storage)
-- Internet connection (for downloading pre-trained models)
-
-### Installation & Setup
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/sarra-bejja/Immuny.git
-cd Immuny
-
-# 2. Create Python virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# 3. Install dependencies
-pip install pandas pillow matplotlib scikit-learn
-pip install sentence-transformers torch torchvision
-pip install open-clip-torch qdrant-client chonkie
-pip install python-dotenv
-
-# 4. Create .env file with your Qdrant credentials
-cat > .env << EOF
-QDRANT_URL=https://<your-cluster-id>.cloud.qdrant.io:6333
-QDRANT_API_KEY=<your-api-key>
-QDRANT_COLLECTION=autoimmune_cases
-EOF
-```
-
-### Running the Pipeline
-
-```bash
-# 5. Open Jupyter notebook
-jupyter notebook dataEmbeddingQdrant.ipynb
-
-# 6. Execute cells in order:
-# Phase 1: Data Loading & Cleaning (10 min)
-# Phase 1: Connection Test (verify setup works)
-# Phase 1: Create Qdrant Collection (5 min)
-# Phase 2: Load ML Models (5 min, downloads ~1GB)
-# Phase 3: Generate Embeddings (45-60 min)
-# Phase 4: Insert into Qdrant (5 min)
-# Phase 5: Build Search Interface (in development)
-```
-
----
-
-## 📊 Performance Metrics
-
-### Pipeline Execution Time
-| Phase | Task | Time | Speed |
-|-------|------|------|-------|
-| 1 | Data cleaning & validation | 5 min | 1,062 cases/sec |
-| 2 | Load ML models (download) | 15 min | First-time only |
-| 3 | Text embedding (67K chunks) | 45 min | 25 chunks/sec |
-| 3 | Image embedding (950 images) | 20 min | 45 img/sec |
-| 4 | Vector database insertion | 5 min | 1,000 pts/sec |
-| **Total** | **End-to-end pipeline** | **~90 min** | **One-time setup** |
-
-### Search Performance
-| Query Type | Latency | Memory | Result Quality |
-|-----------|---------|--------|-----------------|
-| Text search | 50ms | 100MB | 95%+ recall@10 |
-| Image search | 50ms | 100MB | 92% similarity |
-| Multimodal search | 75ms | 150MB | 88% F1 score |
-| Batch (100q) | 2s | 500MB | Same as above |
-
-### Accuracy Metrics
-| Metric | Score | Notes |
-|--------|-------|-------|
-| Text Embedding Quality | 95%+ | Recall@10 on clinical terms |
-| Image Similarity | 92% | CLIP pre-trained on medical data |
-| Multimodal Fusion | 88% F1 | Combined text + image results |
-| HNSW Approximation | 99.2% | vs. exhaustive brute-force |
-
----
 
 ## 🔍 Example Usage
 
@@ -441,17 +366,16 @@ print(f"Best multimodal matches: {len(results)} results")
 - [ ] Search interface implementation
 - [ ] Result re-ranking algorithm
 - [ ] Performance optimization
-- [ ] Web UI (Flask/FastAPI)
+- [ ] Web UI 
 
 ### 📋 Future (Phase 6+)
 - [ ] Query expansion with LLMs
 - [ ] Semantic clustering analysis
 - [ ] Real-time case ingestion
 - [ ] EHR system integration
-- [ ] Multi-language support
-- [ ] Clinician feedback loop
+- [ ] Multi-language support (maybe)
+- [ ] Clinician feedback loop (+ a real doctor's feedback)
 - [ ] Advanced filtering (severity, treatment, outcome)
-- [ ] Recommendation engine
 
 ---
 
@@ -463,9 +387,6 @@ print(f"Best multimodal matches: {len(results)} results")
 - **HNSW** (Malkov & Yashunin, 2018): Efficient Approximate Nearest Neighbor Search
 - **Chonkie**: Intelligent semantic text chunking
 
-### Data Sources
-- PubMed Central: Autoimmune disease case reports
-- Medical imaging: Radiology and pathology repositories
 
 ### Tools & Resources
 - [Qdrant Documentation](https://qdrant.tech/documentation/)
@@ -494,50 +415,10 @@ print(f"Best multimodal matches: {len(results)} results")
 
 ---
 
-## 📝 License
-
-MIT License - See LICENSE file for details
-
-## 👥 Contributors
-
-- **Sarra Bejja** - Project Lead, Architecture, Implementation
-
-## 📧 Contact
-
-- **GitHub**: https://github.com/sarra-bejja/Immuny
-- **Issues**: https://github.com/sarra-bejja/Immuny/issues
-
----
-
 **Status**: Phase 4 Complete ✅ | Phase 5 In Development 🚧  
 **Last Updated**: January 26, 2026
 
-## 🚀 Quick Start
 
-### 1. Data Cleaning (Optional - Already Done)
-The data cleaning was performed in `data_cleaning.ipynb` (Colab):
-- Filtered autoimmune cases from original dataset
-- Cleaned text and metadata
-- Organized medical images
-
-### 2. IMMUNY System Setup
-Run `immuny_system.ipynb` to:
-- Chunk 5,310 cases into 67,651 text segments
-- Generate embeddings (384D text, 512D images)
-- Insert into Qdrant Cloud vector database
-- Build semantic search interface
-
-### 3. Search the System
-```python
-# Text search
-results = search_by_text("systemic lupus erythematosus kidney")
-
-# Image search
-results = search_by_image("path/to/medical/image.webp")
-
-# Get full case
-case = get_full_case(case_id=42)
-```
 
 ## 🛠️ Technology Stack
 
@@ -546,6 +427,7 @@ case = get_full_case(case_id=42)
 - **Image Embeddings**: CLIP ViT-B-32 (512D)
 - **Text Chunking**: Chonkie RecursiveChunker
 - **Dataset**: 5,310 autoimmune cases + 51 medical images
+
 
 ## 📊 System Statistics
 
@@ -563,26 +445,10 @@ QDRANT_API_KEY = "your-api-key"
 COLLECTION_NAME = "autoimmune_cases"
 ```
 
-## 📝 Development Timeline
+## 👥 Contributors
 
-1. ✅ Data collection and cleaning (Colab)
-2. ✅ Text chunking (Chonkie, 512-char chunks)
-3. ✅ Embedding generation (SentenceTransformer + CLIP)
-4. ✅ Qdrant insertion (67,702 vectors)
-5. ✅ Search interface implementation
-6. ✅ System testing and validation
+- **AIspire** - Sarra Bejja & Chadha Dalhoumi
 
-## 🎯 Use Cases
 
-- Find similar autoimmune case studies
-- Search by symptoms, diagnosis, or treatment
-- Image-based medical case retrieval
-- Research and clinical decision support
 
-## 📄 License
 
-[Add your license here]
-
-## 👤 Author
-
-[Your name]
