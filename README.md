@@ -46,7 +46,7 @@ IMMUNY combines cutting-edge AI technologies to:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                  SEARCH INTERFACE (Phase 5)              │
+│                  LLM& Research UI (Phase 5)              │
 │  • Text-only search  • Image-only search  • Multimodal  │
 └────────────────────────┬────────────────────────────────┘
                          │
@@ -90,7 +90,7 @@ IMMUNY combines cutting-edge AI technologies to:
 
 ---
 
-## 📊 Data Pipeline Phases
+## 📊 Data Pipeline Phases (ps : maybe we are going to add more data) 
 
 ### **PHASE 1: Data Ingestion & Validation**
 - Load 5,579 autoimmune disease cases from CSV
@@ -138,7 +138,7 @@ IMMUNY combines cutting-edge AI technologies to:
 - Build multimodal hybrid search
 - Implement result re-ranking and filtering
 - Create REST API endpoints
-- Deploy web UI (Flask/FastAPI)
+- Deploy web UI 
 
 ---
 
