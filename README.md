@@ -3,7 +3,7 @@
 **Multimodal Biological Memory for discovering autoimmune disease cases and similar past 
 biological situations through hybrid search combining medical text and images.**
 
----
+----
 
 ## 🎯 Project Overview
 
